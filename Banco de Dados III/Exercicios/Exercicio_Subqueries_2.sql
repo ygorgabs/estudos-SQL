@@ -220,6 +220,20 @@ SELECT cdimovel, nmendereco, vlpreco FROM Imovel i
 
 -- EX 6
 
-select *
-	from Imovel i where VlPreco = 
-		(select MIN(VlPreco) from Imovel where CdVendedor = i.CdVendedor)
+SELECT  *
+	FROM Imovel i WHERE VlPreco = 
+		(SELECT MIN(VlPreco) FROM Imovel WHERE CdVendedor = i.CdVendedor)
+
+-- EX 7
+
+SELECT *
+	FROM Imovel i WHERE VlPreco IN 
+		(SELECT MIN(VlPreco) from Imovel WHERE CdVendedor != i.CdVendedor GROUP BY CdVendedor)
+
+-- EX 8
+
+SELECT * 
+	FROM Oferta o WHERE VlOferta <
+		(SELECT MIN(VlOferta) from Oferta WHERE CdComprador = 2) AND CdComprador != 2
+
+-- select * from Oferta
