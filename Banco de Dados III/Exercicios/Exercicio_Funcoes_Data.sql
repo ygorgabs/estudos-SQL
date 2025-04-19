@@ -32,3 +32,18 @@ SELECT codFun, Nome,YEAR(DataNasc) AS 'Ano Nascimento'FROM Funcionarios WHERE Da
 
 SELECT Nome, YEAR(DataNasc) FROM Funcionarios WHERE Cidade LIKE 'SP'
 
+-- ex 9
+
+SELECT Nome, DataNasc FROM Funcionarios WHERE YEAR(DataNasc) < 1990
+
+-- ex 10
+
+SELECT DISTINCT Cidade FROM Funcionarios WHERE YEAR(DataNasc) > 1989
+
+-- ex 11
+
+SELECT * FROM Funcionarios WHERE YEAR(DataNasc) IN (1988, 1990)
+
+-- ex 12
+
+SELECT Nome FROM Funcionarios WHERE DAY(DataNasc) = 30
