@@ -8,7 +8,7 @@ Servem para obter dados estatisticos dos registros do banco de dados.
 
 Retorna a media aritmética de uma coluna. Exemplo:
 
-```
+```sql
 Select avg(salario) from cadfun
 Select avg(distinc salario) from cadfun
 Select avg(salario) from cadfun where dpto = 3
@@ -18,7 +18,7 @@ Select avg(salario) from cadfun where dpto = 3
 
 Retorna um valor inteiro com a quantidade de linhas em uma coluna. Exemplo:
 
-```
+```sql
 select from count(*) from cadfun where depto in (3,5)
 select from count(filhos) from cadfun 
 select from count(*) from cadfun where salario > 2000
@@ -46,7 +46,7 @@ Opções de COUNT:
 
 - Retorna a soma dos valores de uma coluna. Exemplo:
 
-```
+```sql
 Select sum(filhos) from cadfun
 Select sum(salario) from cadfun
 Select sum(salario) from cadfun where depto in (3,5)
@@ -57,7 +57,7 @@ O comando `Group By` permite que a apresentação dos dados retornados da consul
 
 Exemplo 1
 
-```
+```sql
 Select depto, count (*) as quantidadade from cadfun
     group by depto
 
@@ -67,7 +67,7 @@ Select depto, sum (salario) as 'Salario Total' from cadfun
 
 Exemplo 2
 
-```
+```sql
 Select codMusica, count(*) from musicaAutor group by codMusica having codMusica < 15
 Select codMusica, count(*) from musicaAutor where codMusica < 15 group by codMusica
 ```
@@ -93,7 +93,7 @@ Regras das subqueries:
 
 ### Subqueries com IN/NOT IN
 
-```
+```sql
 Select * from CARGO
     where COD_CARGO in
         (Select COD_CARGO from FUNCIONARIO)
@@ -108,7 +108,7 @@ Select * from CARGO where COD_CARGO
     not in (Select COD_CARGO from FUNCIONARIO)
 ```
 
-```
+```sql
 Select * from FUNCIONARIO
     where SAL_FUNC = 
         (Select max(SAL_FUNC) from FUNCIONARIO)
@@ -132,7 +132,7 @@ Select *,
 
 ### Update e Delete com subquerie
 
-```
+```sql
 Update FUNCIONARIO
     set SAL_FUNC = SAL_FUNC * 1.1
         where COD_FUNC not in 
@@ -141,4 +141,62 @@ Update FUNCIONARIO
 Delete from FUNCIONARIO
      where COD_FUNC not in 
         (Select COD_FUNC from DEPENDENTE)
+```
+
+## Funções de Data
+
+- **Getdate()**: Retorna a data atual do sistema
+- **Day()**: retorna o dia de uma data fornecida
+- **Month()**: retorna o mês de uma data fornecida
+- **Year()**: retorna o ano de uma data fornecida
+- **DateAdd()**: Adiciona um número a uma parte da data(dia, ano, mes trimestre, hora, etc)
+- **DateDiff()**: Apresenta a diferença de dias , meses ou anos entre duas datas
+- **DateName()**: Apresenta o nome da parte da data (mês ou dia da semana)
+
+## JOIN
+
+É uma operação de algebra relacional(teoria dos conjuntos) em relaciona as colunas de uma ou mais tabelas. O Join combina as colunas utilizando valores em comum entre elas. Existem cinco tipos de Join.
+
+### Inner Join
+
+Por meio dessa cláusula os registros(comuns) de duas tabelas são utilizados para que sejam gerados os dados relacionados de ambas.
+
+```sql
+SELECT a.nome, b.nome 
+FROM TabelaA AS A
+INNER JOIN TabelaB AS B
+ON a.nome = b.nome
+```
+
+### Left Join
+
+Retorna todos os registros que estão na tabela A (mesmo que não estejam na tabela B) e os registros da tabela B que são comuns na tabela B.
+
+```sql
+SELECT a.nome, b.nome 
+FROM TabelaA AS A
+LEFT JOIN TabelaB AS B
+ON a.nome = b.nome
+```
+
+### Right Join
+
+Retorna todos os registros que estão na tabela B (mesmo que não estejam na tabela A) e os registros da Tabela A que são comuns na Tabela B.
+
+```sql
+SELECT a.nome, b.nome
+FROM TabelaA AS A
+RIGHT JOIN TabelaB AS B
+ON a.nome = b.nome
+```
+
+### Full Join
+
+Retorna todos os registros quando houver uma correspondência na tabela esquerda ou direita. Ou seja, todos os registros que estão na Tabela A e na Tabela B.
+
+```sql
+SELECT a.nome, b.nome
+FROM TabelaA
+FULL OUTER JOIN TabelaB
+ON a.nome = b.nome
 ```
